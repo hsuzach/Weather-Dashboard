@@ -1,0 +1,19 @@
+header{
+  text-align: center;
+  background-color: rgb(85, 85, 238);
+  color: rgba(220, 242, 247, 0.959);
+  padding-top: 10px;
+  padding-bottom: 10px;
+  margin-bottom: 15px;
+}
+
+.citySearch{
+  padding-top: 15px;
+  background-color: antiquewhite;
+  justify-content: center;
+}
+
+.weather{
+  background-color:burlywood;
+  padding-top: 15px;
+}
