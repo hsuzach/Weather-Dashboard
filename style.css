@@ -11,11 +11,13 @@ header{
   padding-top: 15px;
   background-color: antiquewhite;
   justify-content: center;
+  margin:auto;
 }
 
-.weather{
+.shownWeather{
   background-color:burlywood;
   padding-top: 15px;
+  margin:auto
 }
 
 #searchHistory{
