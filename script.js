@@ -2,6 +2,7 @@
 
 //documentation for https://openweathermap.org/api
 
+//api key: def1e160639016757785c076a3adc16b
   
 let inputCity = document.getElementById("inputCity")
 let searchBtn = document.getElementById("searchBtn")
@@ -47,3 +48,41 @@ function recallSearched(){
   
 }
 recallSearched();
+
+var GeoUrl= "http://api.openweathermap.org/geo/1.0/direct?q=London&limit=1&appid=def1e160639016757785c076a3adc16b"
+
+
+
+
+function findWeather(){
+  fetch(GeoUrl)
+  .then(
+    function(response){
+      response.json().then(function(data){
+        console.log(data)
+        console.log(data[0].lat)
+        console.log(data[0].lon)
+        
+        var lat = data[0].lat
+        var lon = data[0].lon
+        
+        var WeatherUrl = "http://api.openweathermap.org/data/2.5/weather?lat=" + lat + "&lon=" + lon + "&appid=def1e160639016757785c076a3adc16b"
+
+        fetch(WeatherUrl)
+        .then(
+          function(response){
+            response.json().then(function(data){
+
+              console.log(data)
+            })
+          }
+        )
+
+
+
+      })
+    }
+  )
+}
+findWeather();
+
