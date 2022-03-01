@@ -76,7 +76,7 @@ function findWeather(){
           var lat = data[0].lat
           var lon = data[0].lon
           
-          var WeatherUrl = "http://api.openweathermap.org/data/2.5/weather?lat=" + lat + "&lon=" + lon + "&appid=def1e160639016757785c076a3adc16b"
+          var WeatherUrl = "https://api.openweathermap.org/data/2.5/onecall?lat=" + lat + "&lon=" + lon + "&appid=def1e160639016757785c076a3adc16b"
 
           fetch(WeatherUrl)
           .then(
@@ -88,16 +88,24 @@ function findWeather(){
                 
                 console.log(storedWeather)
                 
-                currentCity.innerHTML = newCity
-                // currentDate
-                // https://day.js.org/docs/en/display/format
+                // currentCity.innerHTML = newCity
+                // // currentDate
+                // // https://day.js.org/docs/en/display/format
                 
                 //convert to fahrenheit
-                let tempF = ((1.8 * (storedWeather.main.temp - 273)) + 32)
+                let tempF = ((1.8 * (storedWeather.current.temp - 273)) + 32)
                 let roundedTemp = Math.round((tempF + Number.EPSILON) * 100) / 100
 
                 currentTemp.innerHTML = "Temp: " + roundedTemp + " &#176; F"
+                
+                let humidity = storedWeather.current.humidity
+                currentHumid.innerHTML = "Humidity: " + humidity + "%"
 
+                let windSpeed = storedWeather.current.wind_speed               
+                currentWind.innerHTML = "Wind Speed: " + windSpeed + " MPH"
+
+                let uvi = storedWeather.current.uvi
+                currentUVI.innerHTML = "UV Index: " + uvi
      
               })
             }

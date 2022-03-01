@@ -1,4 +1,4 @@
-header{
+header {
   text-align: center;
   background-color: rgb(85, 85, 238);
   color: rgba(220, 242, 247, 0.959);
@@ -7,19 +7,22 @@ header{
   margin-bottom: 15px;
 }
 
-.citySearch{
+.citySearch {
   padding-top: 15px;
   background-color: antiquewhite;
   justify-content: center;
-  margin:auto;
+  margin: auto;
+
 }
 
-.shownWeather{
-  background-color:burlywood;
+.shownWeather {
+  background-color: burlywood;
   padding-top: 15px;
-  margin:auto
+  margin: auto;
+  border: 2px solid black;
+  padding-left: 20px;
 }
 
-#searchHistory{
+#searchHistory {
   background-color: cadetblue;
 }
