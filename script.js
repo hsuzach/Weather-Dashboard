@@ -24,10 +24,12 @@ let savedCities = []
 
 function recallSearched(){
 
-  storedCities = JSON.parse(localStorage.Searched);
+  storedCities = JSON.parse(localStorage.Searched).reverse();
   for (i=0; i < storedCities.length; i++){
     $("#searchHistory").append("<btn id=" + storedCities[i] + ">" + storedCities[i] + "</btn> <br>");
+  
   }
+  console.log(storedCities)
   
 }
 recallSearched();
@@ -55,7 +57,7 @@ function findWeather(){
     
     
     localStorage.setItem("Searched", JSON.stringify(savedCities))
-    storedCities = JSON.parse(localStorage.Searched);
+    storedCities = JSON.parse(localStorage.Searched).reverse();
  
     for (i=0; i < storedCities.length; i++){
       $("#searchHistory").append("<btn id=" + storedCities[i] + ">" + storedCities[i] + "</btn> <br>");
@@ -88,10 +90,55 @@ function findWeather(){
                 
                 console.log(storedWeather)
                 
-                // currentCity.innerHTML = newCity
-                // // currentDate
-                // // https://day.js.org/docs/en/display/format
+                currentCity.innerHTML = newCity
+
+                // currentDate
+                // https://day.js.org/docs/en/display/format
+                let currentDay = dayjs().format('M/D/YYYY')
+                currentDate.innerHTML = "("+ currentDay + ")"
+
+                let weatherCode = storedWeather.current.weather[0].icon
+                if (weatherCode == "01d"){
+                  currentWeatherIcon.setAttribute("src","./img/01d@2x.png")
+                }else if (weatherCode == "01n"){
+                  currentWeatherIcon.setAttribute("src","./img/01n@2x.png")
+                }else if (weatherCode == "02d"){
+                  currentWeatherIcon.setAttribute("src","./img/02d@2x.png")
+                }else if (weatherCode == "02n"){
+                  currentWeatherIcon.setAttribute("src","./img/02n@2x.png")
+                }else if (weatherCode == "03d"){
+                  currentWeatherIcon.setAttribute("src","./img/03d@2x.png")
+                }else if (weatherCode == "03n"){
+                  currentWeatherIcon.setAttribute("src","./img/03n@2x.png")
+                }else if (weatherCode == "04d"){
+                  currentWeatherIcon.setAttribute("src","./img/04d@2x.png")
+                }else if (weatherCode == "04n"){
+                  currentWeatherIcon.setAttribute("src","./img/04n@2x.png")
+                }else if (weatherCode == "09d"){
+                  currentWeatherIcon.setAttribute("src","./img/09d@2x.png")
+                }else if (weatherCode == "09n"){
+                  currentWeatherIcon.setAttribute("src","./img/09n@2x.png")
+                }else if (weatherCode == "10d"){
+                  currentWeatherIcon.setAttribute("src","./img/10d@2x.png")
+                }else if (weatherCode == "10n"){
+                  currentWeatherIcon.setAttribute("src","./img/10n@2x.png")
+                }else if (weatherCode == "11d"){
+                  currentWeatherIcon.setAttribute("src","./img/11d@2x.png")
+                }else if (weatherCode == "11n"){
+                  currentWeatherIcon.setAttribute("src","./img/11n@2x.png")
+                }else if (weatherCode == "13d"){
+                  currentWeatherIcon.setAttribute("src","./img/13d@2x.png")
+                }else if (weatherCode == "13n"){
+                  currentWeatherIcon.setAttribute("src","./img/13n@2x.png")
+                }else if (weatherCode == "50d"){
+                  currentWeatherIcon.setAttribute("src","./img/50d@2x.png")
+                }else if (weatherCode == "50n"){
+                  currentWeatherIcon.setAttribute("src","./img/50n@2x.png")
+                } 
                 
+
+                console.log(weatherCode)
+
                 //convert to fahrenheit
                 let tempF = ((1.8 * (storedWeather.current.temp - 273)) + 32)
                 let roundedTemp = Math.round((tempF + Number.EPSILON) * 100) / 100
@@ -114,11 +161,6 @@ function findWeather(){
         })
         }
       )  
-      
-      
-
-
-
 
 
   }
