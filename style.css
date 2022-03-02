@@ -20,10 +20,10 @@ img{
   size: 60%;
 }
 
-.shownWeather {
+#currentWeather {
   background-color: burlywood;
   padding-top: 15px;
-  margin: auto;
+  width: 100%;
   border: 2px solid black;
   padding-left: 20px;
 }
@@ -46,4 +46,11 @@ img{
   -moz-border-radius: 5px;
   -ms-border-radius: 5px;
   -o-border-radius: 5px;
+}
+
+.future{
+  background-color: blue;
+  color: white;
+  margin: auto;
+
 }

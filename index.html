@@ -24,34 +24,36 @@
         <button type="submit" id="searchBtn">Search</button>
         <br><br>
 
-        <ul id="searchHistory">
+        <div id="searchHistory" class="d-flex flex-row-reverse">
           
           
-        </ul>
+        </div>
       </div>
 
-      <div class="shownWeather col-md-9 d-flex flex-row">
+      <div class="shownWeather col-md-9 d-flex flex-column">
         <div id="currentWeather" class="d-flex flex-column">
           <div id="currentSearch" class="d-flex flex-row" >
             <div id="currentCity" style="margin-left: 15px;">City</div>
             
             <div id="currentDate" style="margin-left: 15px;">(0/0/0000) </div>
             
-            <img src="" id="currentWeatherIcon" alt="currentWeatherIcon" style="margin-left: 15px;">
+            <img src="" id="currentWeatherIcon" alt="currentWeatherIcon" style="margin-left: 15px; visibility: hidden;">
           </div>
           <br>
           <div id="currentTemp"></div>
           <div id="currentHumid"></div>
           <div id="currentWind"></div>
-          <div id="currentUVI"></div>
+          <div id="currentUVI" class="d-flex flex-row"></div>
         </div>
 
         <br>
 
-        <div id="weatherForecast">
-
-
-
+        <div id="weatherForecast class=d-flex flex-row">
+          <div class="future col-md-2" id="day1"></div>
+          <div class="future col-md-2" id="day2"></div>
+          <div class="future col-md-2" id="day3"></div>
+          <div class="future col-md-2" id="day4"></div>
+          <div class="future col-md-2" id="day5"></div>
 
 
         </div>
