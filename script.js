@@ -43,7 +43,6 @@ let geoUrl
 let weatherUrl
 let citiesHistory
 
-
 function showHistory(){
   searchHistory.innerHTML = ''
   
@@ -191,7 +190,6 @@ function findGeo(x){
         console.log(lon)  
         
         showWeather(lat,lon);
-        addCity(selectedCity);
       })  
     })
     .catch(function (err) {
@@ -210,9 +208,22 @@ function selectCity(event){
   }
 
   selectedCity = inputCity.value.trim()
-  console.log(selectedCity)
   inputCity.value = ''
   
   findGeo(selectedCity);
+  addCity(selectedCity);
 }
-searchBtn.addEventListener("click",selectCity); 
+searchBtn.addEventListener("click",selectCity);
+
+function recallLast(){
+  if (localStorage.Cities){
+    lastSearched = JSON.parse(localStorage.Cities).reverse()
+    lastCity = lastSearched[0]
+    
+    findGeo(lastCity)
+
+  } else {
+    return
+  }  
+}
+recallLast();
