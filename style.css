@@ -9,12 +9,17 @@ header {
 
 .citySearch {
   padding-top: 15px;
-  background-color: antiquewhite;
+  background-color: rgb(202, 250, 251);
   margin-left: auto;
   margin-right: auto;
   padding-left: 10px;
   padding-right: 10px;
-
+  border: 2px solid grey;
+  border-radius: 5px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  -ms-border-radius: 5px;
+  -o-border-radius: 5px;
 }
 
 .shownWeather {
@@ -27,15 +32,18 @@ img {
 }
 
 #currentWeather {
-  background-color: burlywood;
+  background-color: rgba(251, 217, 172, 0.808);
   padding-top: 15px;
   width: 100%;
   border: 2px solid black;
   padding-left: 20px;
-}
-
-#searchHistory {
-  background-color: cadetblue;
+  padding-bottom: 15px;
+  margin-left: 15px;
+  border-radius: 5px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  -ms-border-radius: 5px;
+  -o-border-radius: 5px;
 }
 
 #currentSearch {
@@ -45,8 +53,12 @@ img {
 }
 
 #searchBtn {
-
+  background-color: rgb(56, 69, 248);
+  color: white;
+  padding-top: 5px;
+  padding-bottom: 5px;
   margin: 10px;
+  border: 2px solid black;
   border-radius: 5px;
   -webkit-border-radius: 5px;
   -moz-border-radius: 5px;
@@ -54,10 +66,33 @@ img {
   -o-border-radius: 5px;
 }
 
+#forecast {
+  margin-left: 15px;
+}
+
 .future {
-  background-color: blue;
+  background-color: rgb(85, 85, 238);
   color: white;
   margin: 5px;
   padding: 5px;
+  border-radius: 10px;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -ms-border-radius: 10px;
+  -o-border-radius: 10px;
+}
 
+.stored {
+  color: white;
+  border: 2px solid black;
+  border-radius: 8px;
+  background-color: rgb(85, 85, 238);
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  -webkit-border-radius: 8px;
+  -moz-border-radius: 8px;
+  -ms-border-radius: 8px;
+  -o-border-radius: 8px;
 }
