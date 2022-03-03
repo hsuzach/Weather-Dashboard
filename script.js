@@ -29,21 +29,19 @@ let geoUrl
 let weatherUrl
 let citiesHistory
 
+
 function showHistory(){
   searchHistory.innerHTML = ''
-
+  
   if (localStorage.Cities){
-    citiesHistory = JSON.parse(localStorage.Cities)
+    citiesHistory = JSON.parse(localStorage.Cities).reverse();
     
     for (i=0; i < citiesHistory.length ; i++){
       $("#searchHistory").append("<btn type='submit'>" + citiesHistory[i] + "</btn> <br>");
     }
-    
   } else {
-    
     return
   }
-
 }
 showHistory();
 
@@ -72,6 +70,32 @@ function showWeather(x,y){
       function(response){
         response.json().then(function(data){
         console.log(data)
+
+        let weatherCode = data.current.weather[0].icon
+        let weatherIconSrc = "./img/" + weatherCode + "@2x.png"
+        currentWeatherIcon.setAttribute("src", weatherIconSrc)
+        currentWeatherIcon.setAttribute("style","visibility: visible");
+
+        let tempF  = Math.round((((1.8 * (data.current.temp - 273)) + 32) + Number.EPSILON) * 100) / 100
+        currentTemp.innerHTML = "Temp: " + tempF + " &#176; F"
+          
+        let humidity = data.current.humidity
+        currentHumid.innerHTML = "Humidity: " + humidity + "%"
+
+        let windSpeed = data.current.wind_speed               
+        currentWind.innerHTML = "Wind Speed: " + windSpeed + " MPH"
+
+        let uvi = data.current.uvi
+        currentUVI.innerHTML = "UV Index: <span id='uviColor' style='display:inline'>" + uvi + "</span>" 
+        let uviColor = document.getElementById("uviColor")
+          if (uvi < 3){
+            uviColor.setAttribute("style","background-color: green")
+          }else if (uvi < 7) {
+            uviColor.setAttribute("style","background-color: yellow")
+          }else {
+            uviColor.setAttribute("style","background-color: red")
+          }
+
         })
       }  
     )
@@ -87,14 +111,23 @@ function findGeo(x){
     .then(
       function(response){
         response.json().then(function(data){
-           
+        if (!data[0]){
+          alert("Sorry, your city could not be found. Please check your spelling or try another city.")
+          return
+        }   
+        currentCity.textContent = x
+        
+        let currentDay = dayjs().format('M/D/YYYY')
+        currentDate.innerHTML = "("+ currentDay + ")"
+
         var lat = data[0].lat
         var lon = data[0].lon
+
         console.log(lat)
         console.log(lon)  
         
         showWeather(lat,lon);
-
+        addCity(selectedCity);
       })  
     })
     .catch(function (err) {
@@ -116,8 +149,6 @@ function selectCity(event){
   console.log(selectedCity)
   inputCity.value = ''
   
-  addCity(selectedCity);
   findGeo(selectedCity);
-
 }
 searchBtn.addEventListener("click",selectCity); 
