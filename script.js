@@ -123,7 +123,7 @@ function showWeather(x,y){
             uviColor.setAttribute("style","background-color: red")
           }
         
-        let dayf1 = dayjs().add(1, 'day').format('M/D/YYYY')
+        let dayf1 = dayjs().tz(localTimezone).add(1, 'day').format('M/D/YYYY')
         day1Date.innerHTML = dayf1
         let iconf1 = data.daily[0].weather[0].icon
         let iconf1Src = "./img/" + iconf1 + "@2x.png"
@@ -131,7 +131,7 @@ function showWeather(x,y){
         displayTemp(data.daily[0].temp.max, day1Temp)
         displayHumidity(data.daily[0].humidity, day1Humid)
         
-        let dayf2 = dayjs().add(2, 'day').format('M/D/YYYY')
+        let dayf2 = dayjs().tz(localTimezone).add(2, 'day').format('M/D/YYYY')
         day2Date.innerHTML = dayf2
         let iconf2 = data.daily[1].weather[0].icon
         let iconf2Src = "./img/" + iconf2 + "@2x.png"
@@ -139,7 +139,7 @@ function showWeather(x,y){
         displayTemp(data.daily[1].temp.max, day2Temp)
         displayHumidity(data.daily[1].humidity, day2Humid)
 
-        let dayf3 = dayjs().add(3, 'day').format('M/D/YYYY')
+        let dayf3 = dayjs().tz(localTimezone).add(3, 'day').format('M/D/YYYY')
         day3Date.innerHTML = dayf3
         let iconf3 = data.daily[2].weather[0].icon
         let iconf3Src = "./img/" + iconf3 + "@2x.png"
@@ -147,7 +147,7 @@ function showWeather(x,y){
         displayTemp(data.daily[2].temp.max, day3Temp)
         displayHumidity(data.daily[2].humidity, day3Humid)
 
-        let dayf4 = dayjs().add(4, 'day').format('M/D/YYYY')
+        let dayf4 = dayjs().tz(localTimezone).add(4, 'day').format('M/D/YYYY')
         day4Date.innerHTML = dayf4
         let iconf4 = data.daily[3].weather[0].icon
         let iconf4Src = "./img/" + iconf4 + "@2x.png"
@@ -155,7 +155,7 @@ function showWeather(x,y){
         displayTemp(data.daily[3].temp.max, day4Temp)
         displayHumidity(data.daily[3].humidity, day4Humid)
 
-        let dayf5 = dayjs().add(5, 'day').format('M/D/YYYY')
+        let dayf5 = dayjs().tz(localTimezone).add(5, 'day').format('M/D/YYYY')
         day5Date.innerHTML = dayf5
         let iconf5 = data.daily[4].weather[0].icon
         let iconf5Src = "./img/" + iconf5 + "@2x.png"
