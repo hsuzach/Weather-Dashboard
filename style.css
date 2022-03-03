@@ -10,13 +10,19 @@ header {
 .citySearch {
   padding-top: 15px;
   background-color: antiquewhite;
-  justify-content: center;
-  margin: auto;
+  margin-left: auto;
+  margin-right: auto;
   padding-left: 10px;
   padding-right: 10px;
 
 }
-img{
+
+.shownWeather {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+img {
   size: 60%;
 }
 
@@ -32,14 +38,14 @@ img{
   background-color: cadetblue;
 }
 
-#currentSearch{
+#currentSearch {
   font-size: large;
   font-weight: bold;
-  align-items:center ;
+  align-items: center;
 }
 
-#searchBtn{
-  
+#searchBtn {
+
   margin: 10px;
   border-radius: 5px;
   -webkit-border-radius: 5px;
@@ -48,9 +54,10 @@ img{
   -o-border-radius: 5px;
 }
 
-.future{
+.future {
   background-color: blue;
   color: white;
-  margin: auto;
+  margin: 5px;
+  padding: 5px;
 
 }

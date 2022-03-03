@@ -21,7 +21,21 @@ let day2 = document.getElementById("day2")
 let day3 = document.getElementById("day3")
 let day4 = document.getElementById("day4")
 let day5 = document.getElementById("day5")
-
+let day1Icon = document.getElementById("day1Icon")
+let day2Icon = document.getElementById("day2Icon")
+let day3Icon = document.getElementById("day3Icon")
+let day4Icon = document.getElementById("day4Icon")
+let day5Icon = document.getElementById("day5Icon")
+let day1Temp = document.getElementById("day1Temp")
+let day2Temp = document.getElementById("day2Temp")
+let day3Temp = document.getElementById("day3Temp")
+let day4Temp = document.getElementById("day4Temp")
+let day5Temp = document.getElementById("day5Temp")
+let day1Humid = document.getElementById("day1Humid")
+let day2Humid = document.getElementById("day2Humid")
+let day3Humid = document.getElementById("day3Humid")
+let day4Humid = document.getElementById("day4Humid")
+let day5Humid = document.getElementById("day5Humid")
 
 let selectedCity
 let savedCities
@@ -76,11 +90,17 @@ function showWeather(x,y){
         currentWeatherIcon.setAttribute("src", weatherIconSrc)
         currentWeatherIcon.setAttribute("style","visibility: visible");
 
-        let tempF  = Math.round((((1.8 * (data.current.temp - 273)) + 32) + Number.EPSILON) * 100) / 100
-        currentTemp.innerHTML = "Temp: " + tempF + " &#176; F"
-          
-        let humidity = data.current.humidity
-        currentHumid.innerHTML = "Humidity: " + humidity + "%"
+        function displayTemp(x,y){
+          let tempF  = Math.round((((1.8 * (x - 273)) + 32) + Number.EPSILON) * 100) / 100
+          y.innerHTML = "Temp: " + tempF + " &#176; F"
+        }
+        displayTemp(data.current.temp, currentTemp)
+        
+        function displayHumidity(x,y){
+          let humidity = x
+          y.innerHTML = "Humidity: " + humidity + "%"
+        }
+        displayHumidity(data.current.humidity, currentHumid)
 
         let windSpeed = data.current.wind_speed               
         currentWind.innerHTML = "Wind Speed: " + windSpeed + " MPH"
@@ -95,6 +115,50 @@ function showWeather(x,y){
           }else {
             uviColor.setAttribute("style","background-color: red")
           }
+        
+        let dayf1 = dayjs().add(1, 'day').format('M/D/YYYY')
+        day1Date.innerHTML = dayf1
+        let iconf1 = data.daily[0].weather[0].icon
+        let iconf1Src = "./img/" + iconf1 + "@2x.png"
+        day1Icon.setAttribute("src", iconf1Src)
+        displayTemp(data.daily[0].temp.max, day1Temp)
+        displayHumidity(data.daily[0].humidity, day1Humid)
+        
+        let dayf2 = dayjs().add(2, 'day').format('M/D/YYYY')
+        day2Date.innerHTML = dayf2
+        let iconf2 = data.daily[1].weather[0].icon
+        let iconf2Src = "./img/" + iconf2 + "@2x.png"
+        day2Icon.setAttribute("src", iconf2Src)
+        displayTemp(data.daily[1].temp.max, day2Temp)
+        displayHumidity(data.daily[1].humidity, day2Humid)
+
+        let dayf3 = dayjs().add(3, 'day').format('M/D/YYYY')
+        day3Date.innerHTML = dayf3
+        let iconf3 = data.daily[2].weather[0].icon
+        let iconf3Src = "./img/" + iconf3 + "@2x.png"
+        day3Icon.setAttribute("src", iconf3Src)
+        displayTemp(data.daily[2].temp.max, day3Temp)
+        displayHumidity(data.daily[2].humidity, day3Humid)
+
+        let dayf4 = dayjs().add(4, 'day').format('M/D/YYYY')
+        day4Date.innerHTML = dayf4
+        let iconf4 = data.daily[3].weather[0].icon
+        let iconf4Src = "./img/" + iconf4 + "@2x.png"
+        day4Icon.setAttribute("src", iconf4Src)
+        displayTemp(data.daily[3].temp.max, day4Temp)
+        displayHumidity(data.daily[3].humidity, day4Humid)
+
+        let dayf5 = dayjs().add(5, 'day').format('M/D/YYYY')
+        day5Date.innerHTML = dayf5
+        let iconf5 = data.daily[4].weather[0].icon
+        let iconf5Src = "./img/" + iconf5 + "@2x.png"
+        day5Icon.setAttribute("src", iconf5Src)
+        displayTemp(data.daily[4].temp.max, day5Temp)
+        displayHumidity(data.daily[4].humidity, day5Humid)
+
+
+
+        weatherForecast.setAttribute("style", "visbility: visible")
 
         })
       }  
