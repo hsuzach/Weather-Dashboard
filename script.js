@@ -1,9 +1,8 @@
-//api call http://api.openweathermap.org/data/2.5/forecast?id=524901&appid=def1e160639016757785c076a3adc16b
-
 //documentation for https://openweathermap.org/api
 
 //api key: def1e160639016757785c076a3adc16b
-  
+
+//list of elements
 let inputCity = document.getElementById("inputCity")
 let searchBtn = document.getElementById("searchBtn")
 let searchHistory = document.getElementById("searchHistory")
@@ -37,15 +36,18 @@ let day3Humid = document.getElementById("day3Humid")
 let day4Humid = document.getElementById("day4Humid")
 let day5Humid = document.getElementById("day5Humid")
 
+//list of variables
 let selectedCity
 let savedCities
 let geoUrl
 let weatherUrl
 let citiesHistory
 
+//plugin for timezones
 dayjs.extend(window.dayjs_plugin_utc);
 dayjs.extend(window.dayjs_plugin_timezone);
 
+//display previously searched cities
 function showHistory(){
   searchHistory.innerHTML = ''
   
@@ -61,6 +63,7 @@ function showHistory(){
 }
 showHistory();
 
+//add a city to local storage and history
 function addCity(x){
   if (localStorage.Cities){
     savedCities = JSON.parse(localStorage.Cities)
@@ -77,7 +80,7 @@ function addCity(x){
   showHistory();
 }
 
-
+//render the weather from coordinates
 function showWeather(x,y){
   weatherUrl = "https://api.openweathermap.org/data/2.5/onecall?lat=" + x + "&lon=" + y + "&appid=def1e160639016757785c076a3adc16b"
   
@@ -87,33 +90,40 @@ function showWeather(x,y){
         response.json().then(function(data){
         console.log(data)
         
+        //display the current date according to timezone
         let localTimezone = data.timezone
-
         let currentDay = dayjs().tz(localTimezone).format('M/D/YYYY')
         currentDate.innerHTML = "("+ currentDay + ")"
 
+        //display the corresponding weather icon
         let weatherCode = data.current.weather[0].icon
         let weatherIconSrc = "./img/" + weatherCode + "@2x.png"
         currentWeatherIcon.setAttribute("src", weatherIconSrc)
         currentWeatherIcon.setAttribute("style","visibility: visible");
 
+        //convert temperature from kelvin to fahrenheit and display
         function displayTemp(x,y){
           let tempF  = Math.round((((1.8 * (x - 273)) + 32) + Number.EPSILON) * 100) / 100
           y.innerHTML = "Temp: " + tempF + " &#176; F"
         }
         displayTemp(data.current.temp, currentTemp)
         
+        //displays humidity
         function displayHumidity(x,y){
           let humidity = x
           y.innerHTML = "Humidity: " + humidity + "%"
         }
         displayHumidity(data.current.humidity, currentHumid)
 
+        //display wind speeds in MPH
         let windSpeed = data.current.wind_speed               
         currentWind.innerHTML = "Wind Speed: " + windSpeed + " MPH"
 
+        //displays uv index
         let uvi = data.current.uvi
         currentUVI.innerHTML = "UV Index: <span id='uviColor' style='display:inline'>" + uvi + "</span>" 
+
+        //colors uvi according to met numbers
         let uviColor = document.getElementById("uviColor")
           if (uvi < 3){
             uviColor.setAttribute("style","background-color: green")
@@ -123,6 +133,7 @@ function showWeather(x,y){
             uviColor.setAttribute("style","background-color: red")
           }
         
+        //add each future days date and weather elements
         let dayf1 = dayjs().tz(localTimezone).add(1, 'day').format('M/D/YYYY')
         day1Date.innerHTML = dayf1
         let iconf1 = data.daily[0].weather[0].icon
@@ -175,6 +186,7 @@ function showWeather(x,y){
     })
 }
 
+//determine the coordinates from city name
 function findGeo(x){
   geoUrl = "http://api.openweathermap.org/geo/1.0/direct?q=" + x + "&limit=1&appid=def1e160639016757785c076a3adc16b"  
 
@@ -200,7 +212,7 @@ function findGeo(x){
   
 }
 
-
+//record city value to find coordinates and add to history
 function selectCity(event){
   event.preventDefault()
 
@@ -217,6 +229,7 @@ function selectCity(event){
 }
 searchBtn.addEventListener("click",selectCity);
 
+//renders the last searched city when page refreshes
 function recallLast(){
   if (localStorage.Cities){
     lastSearched = JSON.parse(localStorage.Cities).reverse()
@@ -230,6 +243,7 @@ function recallLast(){
 }
 recallLast();
 
+//displays previous search history when page refreshes
 function recallFromHistory(x){
   if (!x.target.matches('.stored')) {
     return;
