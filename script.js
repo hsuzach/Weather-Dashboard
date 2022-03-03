@@ -50,7 +50,7 @@ function showHistory(){
     citiesHistory = JSON.parse(localStorage.Cities).reverse();
     
     for (i=0; i < citiesHistory.length ; i++){
-      $("#searchHistory").append("<btn type='submit'>" + citiesHistory[i] + "</btn> <br>");
+      $("#searchHistory").append("<btn type='submit' class='stored' data-search=" + citiesHistory[i] + ">" + citiesHistory[i] + "</btn> <br>");
     }
   } else {
     return
@@ -157,7 +157,7 @@ function showWeather(x,y){
 
 
 
-        weatherForecast.setAttribute("style", "visbility: visible")
+        forecast.setAttribute("style", "visbility: visible")
 
         })
       }  
@@ -185,9 +185,6 @@ function findGeo(x){
 
         var lat = data[0].lat
         var lon = data[0].lon
-
-        console.log(lat)
-        console.log(lon)  
         
         showWeather(lat,lon);
       })  
@@ -227,3 +224,14 @@ function recallLast(){
   }  
 }
 recallLast();
+
+function recallFromHistory(x){
+  if (!x.target.matches('.stored')) {
+    return;
+  }
+
+  let btn = x.target
+  let fromHistory = btn.getAttribute('data-search')
+  findGeo(fromHistory)
+}
+searchHistory.addEventListener('click', recallFromHistory)
