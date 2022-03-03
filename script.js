@@ -43,6 +43,9 @@ let geoUrl
 let weatherUrl
 let citiesHistory
 
+dayjs.extend(window.dayjs_plugin_utc);
+dayjs.extend(window.dayjs_plugin_timezone);
+
 function showHistory(){
   searchHistory.innerHTML = ''
   
@@ -83,6 +86,11 @@ function showWeather(x,y){
       function(response){
         response.json().then(function(data){
         console.log(data)
+        
+        let localTimezone = data.timezone
+
+        let currentDay = dayjs().tz(localTimezone).format('M/D/YYYY')
+        currentDate.innerHTML = "("+ currentDay + ")"
 
         let weatherCode = data.current.weather[0].icon
         let weatherIconSrc = "./img/" + weatherCode + "@2x.png"
@@ -179,9 +187,6 @@ function findGeo(x){
           return
         }   
         currentCity.textContent = x
-        
-        let currentDay = dayjs().format('M/D/YYYY')
-        currentDate.innerHTML = "("+ currentDay + ")"
 
         var lat = data[0].lat
         var lon = data[0].lon
