@@ -27,17 +27,42 @@ let selectedCity
 let savedCities
 let geoUrl
 let weatherUrl
+let citiesHistory
 
-function addCity(){
-  if (JSON.stringify(savedCities)){
-    savedCities.push(selectedCity)
+function showHistory(){
+  searchHistory.innerHTML = ''
+
+  if (localStorage.Cities){
+    citiesHistory = JSON.parse(localStorage.Cities)
+    
+    for (i=0; i < citiesHistory.length ; i++){
+      $("#searchHistory").append("<btn type='submit'>" + citiesHistory[i] + "</btn> <br>");
+    }
+    
+  } else {
+    
+    return
+  }
+
+}
+showHistory();
+
+function addCity(x){
+  if (localStorage.Cities){
+    savedCities = JSON.parse(localStorage.Cities)
+    savedCities.push(x)
     localStorage.setItem('Cities', JSON.stringify(savedCities))
+
   } else {
     savedCities = []
-    savedCities.push(selectedCity)
+    savedCities.push(x)
     localStorage.setItem('Cities', JSON.stringify(savedCities))
+    
   }
+  // console.log(citiesHistory.length)
+  showHistory();
 }
+
 
 function showWeather(x,y){
   weatherUrl = "https://api.openweathermap.org/data/2.5/onecall?lat=" + x + "&lon=" + y + "&appid=def1e160639016757785c076a3adc16b"
@@ -67,6 +92,7 @@ function findGeo(x){
         var lon = data[0].lon
         console.log(lat)
         console.log(lon)  
+        
         showWeather(lat,lon);
 
       })  
@@ -76,7 +102,6 @@ function findGeo(x){
     })
   
 }
-
 
 
 function selectCity(event){
@@ -91,12 +116,8 @@ function selectCity(event){
   console.log(selectedCity)
   inputCity.value = ''
   
-  addCity();
+  addCity(selectedCity);
   findGeo(selectedCity);
 
 }
 searchBtn.addEventListener("click",selectCity); 
-
-
-
-
