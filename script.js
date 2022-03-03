@@ -188,7 +188,7 @@ function showWeather(x,y){
 
 //determine the coordinates from city name
 function findGeo(x){
-  geoUrl = "http://api.openweathermap.org/geo/1.0/direct?q=" + x + "&limit=1&appid=def1e160639016757785c076a3adc16b"  
+  geoUrl = "https://api.openweathermap.org/geo/1.0/direct?q=" + x + "&limit=1&appid=def1e160639016757785c076a3adc16b"  
 
   fetch(geoUrl)
     .then(
